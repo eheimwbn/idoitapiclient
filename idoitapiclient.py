@@ -21,7 +21,13 @@ class IdoitApiClient():
         """
         generic call to aip 
         :param params: dict with api method and api params 
-        :return: 
+        :return: API message as string 
         """
-        r = requests.post(self.url, auth=self.auth, headers=self.headers, data=json.dumps(params),)
-        print(r.text)
+        response = requests.post(self.url, auth=self.auth, headers=self.headers, data=json.dumps(params))
+        dict = json.loads(response.text)
+        print(dict)
+        if 'error' in dict.keys():
+            return dict['error']['data']['error']
+        elif dict['result']['success'] is True:
+            return dict['result']['message']
+
