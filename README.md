@@ -4,7 +4,7 @@ api client for the i-doit cmdb JSON RPC API in python3
 
 quite early state ...
 
-##Usage:
+## Usage:
 
 #### import the client ####
 ```
