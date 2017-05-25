@@ -19,7 +19,7 @@ class IdoitApiClient():
 
     def generic_request(self, params: dict):
         """
-        generic call to aip 
+        generic call to api
         :param params: dict with api method and api params 
         :return: API message as string 
         """
