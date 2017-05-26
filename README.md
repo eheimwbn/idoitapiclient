@@ -7,42 +7,47 @@ quite early state ...
 ## Usage:
 
 #### import the client ####
-```
+```python
 from idoitapiclient import IdoitApiClient as idoit
 ```
 
-#### set auth params for the api
-```
-auth = ('admin', 'admin')
-```
-
-#### as well as the url
-```
+#### set up the connection to the api
+```python
 url = 'https://demo.i-doit.com/src/jsonrpc.php'
-```
+auth = ('admin', 'admin')
+apikey = 'c1ia5q'
 
-#### create instance
-```
-call = idoit(auth, url)
-```
+# create instance 
+call = idoit(url, auth, apikey)
 
-##### build a dictionary with the needed params  
-```
+# build a dictionary with the needed params  
+
 params = {
-                     "jsonrpc": "2.0",
-                     "method": "cmdb.object.create",
-                     "params": 
-                     {"type": "C__OBJTYPE__SERVER", 
-                     "title": "FancyName", 
-                     "apikey": "c1ia5q"},
-                     "id": 71
-                     }
-```
-
-##### call the generic request method
-```
+             "jsonrpc": "2.0",
+             "method": "cmdb.object.create",
+             "params":  {
+                 "type": "C__OBJTYPE__SERVER", 
+                 "title": "FancyName", 
+                        },
+             }
+             
+# call the generic request method
 call.generic_request(params)
 ```
+returns the (error)message from API   
+
+
+## Objects 
+#### find object by its name
+
+```python
+
+call.retrieve_object_id(name)
+```
+given __name__ as string  <br />
+method returns __id__ as int or __false__ if object is not found
+
+
 
 ## Links
 - [i-doit community page](https://www.i-doit.org/)
