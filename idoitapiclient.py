@@ -31,7 +31,7 @@ class IdoitApiClient():
         params['id'] = self.api_id
         response = requests.post(self.url, auth=self.auth, headers=self.headers, data=json.dumps(params))
         dict = json.loads(response.text)
-
+        #print(dict)
         if 'error' in dict.keys():
             return dict['error']['data']['error']
         else:
@@ -56,6 +56,26 @@ class IdoitApiClient():
         result = self.generic_request(params)
         if not result == []:
             return int(result[0]['id'])
+        else:
+            return False
+
+    def delete_object_by_id(self, object_id: int):
+        """
+        Deletes object by its id
+        :param object_id: object id as integer
+        :return: True if successful, False if errors appeared 
+        """
+        params = {
+            "jsonrpc": "2.0",
+            "method": "cmdb.object.delete",
+            "params": {
+                'status': 'C__RECORD_STATUS__DELETED',
+               },
+        }
+        params['params']['id'] = object_id
+        result = self.generic_request(params)
+        if not result == []:
+            return result['success']
         else:
             return False
 

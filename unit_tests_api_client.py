@@ -3,8 +3,13 @@ from idoitapiclient import IdoitApiClient as doit
 
 
 class ApiClientTestCase(unittest.TestCase):
+    """
+    Unit Test for idoitapiclient. 
+    'online' test run against 'demo.i-doit.com' 
+    """
 
     def setUp(self):
+
         self.auth = ('admin', 'admin')
         self.auth2 = ('adin', 'admin')
 
@@ -32,11 +37,21 @@ class ApiClientTestCase(unittest.TestCase):
         self.assertIn('created', ut.generic_request(self.params)['message'])
         ut2 = doit(self.url, self.auth2, self.apikey)
         self.assertIn('username', ut2.generic_request(self.params))
+        ut.delete_object_by_id(ut.retrieve_object_id('LX0007'))
 
     def test_retrieve_object_id(self):
         ut = doit(self.url, self.auth, self.apikey)
+        ut.generic_request(self.params)
         self.assertFalse(ut.retrieve_object_id('ffggeezz'))
         self.assertTrue(ut.retrieve_object_id('LX0007') > 0)
+        ut.delete_object_by_id(ut.retrieve_object_id('LX0007'))
+
+    def test_delete_object(self):
+        ut = doit(self.url, self.auth, self.apikey)
+        ut.generic_request(self.params)
+        self.assertFalse(ut.delete_object_by_id(ut.retrieve_object_id('ffggeezz')))
+        self.assertTrue(ut.delete_object_by_id(ut.retrieve_object_id('LX0007')))
+
 
 if __name__ == '__main__':
     unittest.main()

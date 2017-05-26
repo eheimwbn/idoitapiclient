@@ -37,7 +37,7 @@ returns the (error)message from API
 
 
 ## Objects 
-#### find object by its name
+### Find object by its name
 
 ```python
 
@@ -46,6 +46,14 @@ call.retrieve_object_id(name)
 given __name__ as string  <br />
 method returns __id__ as int or __false__ if object is not found
 
+### Delete object by its id
+:exclamation: careful object ist deleted not archived :exclamation:
+```python
+
+call.delete_object_by_id(object_id)
+```
+given __object_id__ as int  <br />
+method returns __True__ if object is deleted and __false__ if object_id is not found
 
 
 ## Links
