@@ -21,7 +21,6 @@ apikey = 'c1ia5q'
 call = idoit(url, auth, apikey)
 
 # build a dictionary with the needed params  
-
 params = {
              "jsonrpc": "2.0",
              "method": "cmdb.object.create",
